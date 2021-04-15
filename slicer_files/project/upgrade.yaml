@@ -1,0 +1,34 @@
+topology_spec:
+    use_ovs: true
+    use_patch_panel: true
+    dutmgmt_spec:
+        network_type: L2
+        ha_type: No HA
+    duts:
+        default:
+          impl_spec:
+            vcpus: 8
+            ram: 24576
+        duts:
+            - aos_server:
+                has_mgmt_intf: true
+                impl_type: virtual
+                os_type: aos
+                role: server
+            - aos_server2:
+                has_mgmt_intf: true
+                impl_type: virtual
+                os_type: aos
+                role: server
+    links:
+        default:
+        links:
+
+deploy_spec:
+    aos_server:
+        branch: AOS_3.3.0a_OB
+        build: lastSuccessfulBuild
+        duts:
+            aos_server2:
+                branch: AOS_latest_OB
+                build: lastSuccessfulBuild

@@ -1,0 +1,24 @@
+#!/bin/sh
+session="work"
+
+# set up tmux
+tmux start-server
+
+# create a new tmux session
+tmux new-session -d -s $session -n GIT 
+
+# Select pane 1
+tmux selectp -t 1 
+tmux send-keys "fish" C-m 
+
+# create two new windows called vagrant 
+tmux new-window -n "vagrant" 
+tmux send-keys "vagrant ssh -- -t 'cd /vagrant; fish; source build/apstrktr.env'" C-m
+
+tmux new-window -n "vagrant"
+tmux send-keys "vagrant ssh -- -t 'cd /vagrant; fish; source build/apstrktr.env'" C-m
+# return to main vim window
+tmux select-window -t 0
+
+# Finished setup, attach to the tmux session!
+tmux attach-session -t $session

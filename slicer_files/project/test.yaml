@@ -1,0 +1,60 @@
+topology_spec:
+    use_ovs: true
+    use_patch_panel: true
+    dutmgmt_spec:
+        network_type: L2
+        ha_type: No HA
+    duts:
+        default:
+            has_mgmt_intf: true
+
+        duts:
+            - spine1:
+                role: spine
+                os_type: cumulus
+                model: "Redstone XP 56854 System"
+                impl_type: physical
+            - spine2:
+                role: switch
+                os_type: cumulus
+                model: "S4048ON"
+                impl_type: physical
+            - leaf1:
+                role: leaf
+                os_type: cumulus
+                model: "MSN2100"
+                impl_type: physical
+            - leaf2:
+                role: switch
+                os_type: cumulus
+                model: "LY8 56854 System"
+                impl_type: physical
+            - leaf3:
+                role: switch
+                os_type: cumulus
+                model: "AS5712_54X"
+                impl_type: physical
+            - leaf4:
+                role: switch
+                os_type: cumulus
+                model: "AS6712_32X"
+                impl_type: physical
+            - server1:
+                role: server
+                os_type: ubuntu
+                impl_type: virtual
+
+    links:
+        default:
+            speed: 10
+            physical_link_count: 1
+            role: traffic
+        links:
+            - spine1-leaf1:
+            - spine1-leaf2:
+            - spine1-leaf3:
+            - spine1-leaf4:
+            - spine2-leaf1:
+            - spine2-leaf2:
+            - spine2-leaf3:
+            - spine2-leaf4:
